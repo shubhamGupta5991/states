@@ -105,7 +105,7 @@ const States = () => {
                 </option>
             ))}
         </select>
-        <p>{chosenCity && (<div><h1>You selected {chosenCity},<span>{chosenState},{chosenCountry}</span></h1></div>)}</p>
+        <p>{chosenCity && (<div><h1>You Selected {chosenCity},<span style={{fontSize:'25px',fontWeight:'300'}}>{chosenState},{chosenCountry}</span></h1></div>)}</p>
     </div>
   )
 }
