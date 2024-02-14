@@ -13,9 +13,14 @@ const States = () => {
 
     useEffect(()=>{
       async  function apiCallCountry(){
-          const response = await axios.get(`${endPoint}/countries`)
-        //   console.log(response.data)
-          setCountries(response.data)
+         try {
+            const response = await axios.get(`${endPoint}/countries`)
+            //   console.log(response.data)
+              setCountries(response.data)
+            
+         } catch (error) {
+            console.log(error);
+         }
                 
         }
         apiCallCountry();
@@ -23,6 +28,7 @@ const States = () => {
     },[])
     useEffect(()=>{
       async  function apiCallState(){
+       try {
         if(chosenCountry){
             
             const response = await axios.get(`${endPoint}/country=${chosenCountry}/states`)
@@ -32,6 +38,11 @@ const States = () => {
             setChosenCity('')
             setChosenState('')
         }
+        
+       } catch (error) {
+        console.log(error);
+        
+       }
                 
         }
         apiCallState();
@@ -40,6 +51,7 @@ const States = () => {
 
     useEffect(()=>{
       async  function apiCallCity(){
+       try {
         if(chosenCountry && chosenState){
             
             const response = await axios.get(`${endPoint}/country=${chosenCountry}/state=${chosenState}/cities`)
@@ -49,6 +61,10 @@ const States = () => {
             
            
         }
+        
+       } catch (error) {
+        console.log(error);
+       }
                 
         }
         apiCallCity();
@@ -89,7 +105,7 @@ const States = () => {
                 </option>
             ))}
         </select>
-        <p>{chosenCity && (`You selected ${chosenCity},${chosenState},${chosenCountry}`)}</p>
+        <p>{chosenCity && (<div><h1>You selected {chosenCity},<span>{chosenState},{chosenCountry}</span></h1></div>)}</p>
     </div>
   )
 }
